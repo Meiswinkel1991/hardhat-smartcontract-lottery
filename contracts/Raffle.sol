@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: SEE LICENSE IN LICENSE
 pragma solidity ^0.8.8;
 
-// Raffle
+// Raffle Contract
 
 // Enter the lottery (paying some amount)
 // Pick a random winner
@@ -50,6 +50,7 @@ contract Raffle is VRFConsumerBaseV2, KeeperCompatibleInterface {
     uint256 private immutable i_interval;
 
     /* Events */
+    event RequestedRaffleWinner(uint256 indexed requestId);
     event RaffleEnter(address indexed player);
     event WinnerPicked(address indexed winner);
 
@@ -131,13 +132,14 @@ contract Raffle is VRFConsumerBaseV2, KeeperCompatibleInterface {
         // Request the random Number
         //Once we get it, do something with it
         s_raffleState = RaffleState.CALCULATING;
-        i_vrfCoordinator.requestRandomWords(
+        uint256 requestId = i_vrfCoordinator.requestRandomWords(
             i_gasLane,
             i_subscriptionId,
             i_requestConfirmations,
             i_callbackGasLimit,
             i_numWords
         );
+        emit RequestedRaffleWinner(requestId);
     }
 
     function fulfillRandomWords(
@@ -185,11 +187,15 @@ contract Raffle is VRFConsumerBaseV2, KeeperCompatibleInterface {
         return s_players.length;
     }
 
-    function getLastTimestamp() public view returns (uint256) {
+    function getLastTimeStamp() public view returns (uint256) {
         return s_lastTimeStamp;
     }
 
     function getRequestConfirmations() public view returns (uint256) {
         return i_requestConfirmations;
+    }
+
+    function getInterval() public view returns (uint256) {
+        return i_interval;
     }
 }

@@ -47,13 +47,16 @@ module.exports = {
         },
     },
     gasReporter: {
-        enabled: false,
+        enabled: true,
         currency: "USD",
         outputFile: "gas-reporter.txt",
         noColors: true,
         //coinmarketcap: process.env.COINMARKETCAP_API_KEY,
     },
     etherscan: {
-        apiKey: process.env.ETHERSCAN_API_KEY,
+        apiKey: ETHERSCAN_API,
+    },
+    mocha: {
+        timeout: 200000, // 200 seconds max for running tests
     },
 }

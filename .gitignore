@@ -8,5 +8,6 @@ typechain
 cache
 artifacts
 coverage
+gas-reporter.txt
 gas-report.txt
 coverage.json
