@@ -8,7 +8,7 @@ require("dotenv").config()
 
 const RINKEBY_RPC_URL = process.env.RINKEBY_URL
 const PRIVATE_KEY = process.env.PRIVATE_KEY
-const ETHERSCAN_API = process.env.ETHERSCAN_API
+const ETHERSCAN_API = process.env.ETHERSCAN_API_KEY
 const COINMARKET_API_KEY = process.env.COINMARKET_API_KEY
 
 /**
